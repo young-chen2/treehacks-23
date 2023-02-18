@@ -14,7 +14,7 @@ import openai
 model = whisper.load_model("base")
 recorder = PvRecorder(device_index=-1, frame_length=512)
 
-while True:
+def recordAudio():
     # RECORDING AUDIO!!!
     print("Recording audio...")
         
@@ -36,6 +36,7 @@ while True:
         recorder.delete()
     print("Audio recorded! (current_speech.mp3)")
     
+def processAudio():
     # PARSING AUDIO Tos AND SoT!    
     print("Parsing audio...")
     # load audio and pad/trim it to fit 30 seconds
@@ -51,9 +52,10 @@ while True:
     result = whisper.decode(model, mel, options)
     # print the recognized text
     print(result.text)
+    return result.text
     
+def promptGTP(prompt):
     # CHAT GTP!
-    prompt = result.text
     openai.api_key = os.environ['api_key']
 
     completions = openai.Completion.create(
@@ -67,7 +69,9 @@ while True:
 
     message = completions.choices[0].text
     print(message)
+    return message
     
+def speakText(message):
     # SPEAKING THE TEXT!
     desired_langs = {'Taiwanese': 'zh-TW',
                      'Chinese': 'zh-CN',
@@ -82,10 +86,19 @@ while True:
     translator = Translator()
     translated = translator.translate(message, dest=desired_lang)
     
+    print(translated.text)
+    
     myobj = gTTS(translated.text, lang=desired_lang, slow=True)
   
     myobj.save("response.mp3")
   
     os.system("mpg321 response.mp3")
     
-    
+while True:
+    recordAudio()
+    prompt = processAudio()
+    message = promptGTP(prompt)
+    speakText(message)
+    # os.remove('current_speech.mp3')
+    # os.remove('response.mp3')
+
