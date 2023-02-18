@@ -5,6 +5,8 @@ Workflow from Terminal:
 
 Open conda environment and install all necessary dependencies & libraries.
 
+pip install python-vlc
+
 export api_key=xxx (your personal API key for OpenAI's API)
 
 Run: python audio_process.py
