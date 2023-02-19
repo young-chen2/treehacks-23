@@ -46,11 +46,10 @@ class AudioProcess():
             
         audio = []
         start_time = time.time()
-        while (time.time() - start_time) < 10:
-            self.recorder.start()
-            while True:
-                frame = self.recorder.read()
-                audio.extend(frame)
+        self.recorder.start()
+        while (time.time() - start_time) < 5:
+            frame = self.recorder.read()
+            audio.extend(frame)
         
         self.recorder.stop()
         with wave.open('current_speech.mp3', 'w') as f:
