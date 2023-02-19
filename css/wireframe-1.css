@@ -1,0 +1,45 @@
+/* screen - wireframe-1 */
+html {
+  scroll-behavior: smooth;
+}
+.wireframe-1 {
+  align-items: flex-start;
+  background-color: #ffffff;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  height: 2048px;
+  width: 1440px;
+}
+
+.wireframe-1 .overlap-group1 {
+  align-items: flex-end;
+  background-image: url(../img/image-1.png);
+  height: 1032px;
+  justify-content: flex-end;
+  padding: 51.2px 669px;
+}
+
+.wireframe-1 .group {
+  height: 102px;
+  width: 101px;
+}
+
+.wireframe-1 .overlap-group {
+  align-items: flex-start;
+  background-image: url(../img/image-2.png);
+  height: 1016px;
+  padding: 307px 357px;
+}
+
+.wireframe-1 .mask-group {
+  height: 229px;
+  width: 232px;
+}
+
+.wireframe-1 .overlap {
+  background-position: 50% 50%;
+  background-size: cover;
+  display: flex;
+  min-width: 1440px;
+}
