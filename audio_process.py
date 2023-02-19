@@ -97,29 +97,31 @@ def speakText(message):
     
     # os.system('play response.mp3')
 
-try:
-    conversation_context = 'Given this context, generate the next response in the conversation. Do so one response at a time and let me speak. Only generate one response Allin for now. If the user input does not make grammatical sense, say "Sorry, I don\'t understand that. It may be your pronounciation or your grammar. Then tell the user what you think he or she is saying and how to to pronounce that. Pretend you are a cashier named Allin working at a cafe. On the menu is sandwiches for $15, salad for $10, soup for $10, water for $1, coffee for $4, orange and apple juice for $3 each, cake for $5, ice cream for $2, and cookies for $2. I will act as a customer. Wait for me to speak before you respond. Do not serve me anything not on the menu. Do not say customer lines. Have a conversation with me where you say your name and ask me what I would like to order. When I say my order, tell me what my total price is and ask if I would like to pay in cash or credit. After I answer, ask if you can get a name for my order, and after I say my name, address me and say "Thank you. Your food will be ready shortly.'
+def run():
+    try:
+        conversation_context = 'Given this context, generate the next response in the conversation. Do so one response at a time and let me speak. Only generate one response Allin for now. If the user input does not make grammatical sense, say "Sorry, I don\'t understand that. It may be your pronounciation or your grammar. Then tell the user what you think he or she is saying and how to to pronounce that. Pretend you are a cashier named Allin working at a cafe. On the menu is sandwiches for $15, salad for $10, soup for $10, water for $1, coffee for $4, orange and apple juice for $3 each, cake for $5, ice cream for $2, and cookies for $2. I will act as a customer. Wait for me to speak before you respond. Do not serve me anything not on the menu. Do not say customer lines. Have a conversation with me where you say your name and ask me what I would like to order. When I say my order, tell me what my total price is and ask if I would like to pay in cash or credit. After I answer, ask if you can get a name for my order, and after I say my name, address me and say "Thank you. Your food will be ready shortly.'
     
-    initial_convo = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=conversation_context,
-        max_tokens=30,
-        n=1,
-        stop=None,
-        temperature=0.5,
-    )
+        initial_convo = openai.Completion.create(
+            engine="text-davinci-003",
+            prompt=conversation_context,
+            max_tokens=30,
+            n=1,
+            stop=None,
+            temperature=0.5,
+        )
 
-    print(initial_convo.choices[0].text)
+        print(initial_convo.choices[0].text)
         
-    recordAudio()
-    prompt = processAudio()
-    message, new_context = promptGTP(prompt, conversation_context)
-    new_context += " \n Allin: " + message
-    conversation_context = new_context
-    speakText(message)
-    # PLAY THE MESSAGE ON FRONT END!
+        recordAudio()
+        prompt = processAudio()
+        message, new_context = promptGTP(prompt, conversation_context)
+        new_context += " \n Allin: " + message
+        conversation_context = new_context
+        speakText(message)
+        
+        # PLAY THE MESSAGE ON FRONT END!!
     
-except KeyboardInterrupt:
-    print("Exiting...")
+    except KeyboardInterrupt:
+        print("Exiting...")
 
 
