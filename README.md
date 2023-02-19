@@ -1,5 +1,7 @@
 # treehacks-23
-CatGPT!
+KittyChat! 
+
+https://devpost.com/software/kittychat-catgpt-for-language-learning?ref_content=user-portfolio&ref_feature=in_progress
 
 Workflow from Terminal:
 
