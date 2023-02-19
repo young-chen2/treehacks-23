@@ -4,16 +4,24 @@ import audio_process
 from flask import Flask, request, jsonify, render_template, send_file
 
 app = Flask(__name__)
+pipeline = audio_process.AudioProcess()
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("cafe.html")
 
-@app.route("/record-audio", methods=["POST"])
+@app.route("/record-audio")
 def record_audio():
-    audio_process.
+    pipeline.recordAudio() # records for 10 seconds, saves audio locally
+    prompt = pipeline.processAudio() # parses audio, saves audio locally
+    message = pipeline.promptGTP(prompt, pipeline.conversation_context)
+    pipeline.speakText(message)
 
-@app.route("/upload-audio", methods=["POST"])
+@app.route("/delete_audio")
+def delete_audio():
+    pipeline.deleteAudio()
+
+@app.route("/upload-audio")
 def upload_audio():
     # Get the audio file from the request
     audio_file = request.files.get("audio")
@@ -38,7 +46,7 @@ def play_audio():
     remote_audio_url = request.args.get("url")
 
     # Download the remote audio file
-    local_audio_filename = "temp_audio.wav"
+    local_audio_filename = "response.mp3"
     response = requests.get(remote_audio_url)
 
     # Save the downloaded audio file to disk
@@ -46,7 +54,7 @@ def play_audio():
         f.write(response.content)
 
     # Return the audio file for playback
-    return send_file(local_audio_filename, mimetype="audio/wav", as_attachment=False)
+    return send_file(local_audio_filename, mimetype="audio/mp3", as_attachment=False)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
