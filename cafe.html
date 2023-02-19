@@ -49,9 +49,11 @@
             <img class="image-3 image" src="img/image-3@2x.png" alt="image 3" />
             <div class="rectangle-4"></div>
             <div class="rectangle-5"></div>
-              <div class="repeat"><input type="button" value="Repeat" onclick="play()">
-              <audio id="audio" src="response.mp3"></audio></div>
-            <h1 class="title">Speak</h1>
+            <a href="{{ url_for('play-audio')}}" ><h1 class="repeat">Repeat</h1></a>
+<!--              <div class="repeat"><input type="button" value="Repeat" onclick="play()">-->
+<!--              <audio id="audio" src="response.mp3"></audio></div>-->
+<!--            <div class="repeat"><input type="button" value="Repeat" onclick="play()">-->
+            <a href="#" onclick="window.open({{ url_for('record-audio')}}); window.open({{ url_for('upload-audio')}});"><h1 class="title">Speak</h1></a>
             <img
               class="icon-message-question"
               src="img/---icon--message-question-@2x.png"
