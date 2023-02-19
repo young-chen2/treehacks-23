@@ -84,7 +84,7 @@ def speakText(message):
                      'Hindi' : 'hi'
                      }
     
-    desired_lang = desired_langs['Italian']
+    desired_lang = desired_langs['English']
     
     translator = Translator()
     translated = translator.translate(message, dest=desired_lang)
@@ -95,11 +95,12 @@ def speakText(message):
   
     myobj.save('response.mp3')
     
-    os.system('play response.mp3')
+    # os.system('play response.mp3')
 
 try:
-    conversation_context = 'Given this context, generate the next response in the conversation. Do so one response at a time and let me speak. Only generate one response Allin for now: Pretend you are a cashier named Allin working at a cafe. On the menu is sandwiches for $15, salad for $10, soup for $10, water for $1, coffee for $4, orange and apple juice for $3 each, cake for $5, ice cream for $2, and cookies for $2. I will act as a customer. Wait for me to speak before you respond. Do not serve me anything not on the menu. Do not say customer lines. Have a conversation with me where you say your name and ask me what I would like to order. When I say my order, tell me what my total price is and ask if I would like to pay in cash or credit. After I answer, ask if you can get a name for my order, and after I say my name, address me and say "Thank you. Your food will be ready shortly.'
-
+    conversation_context = 'Given this context, generate the next response in the conversation. Do so one response at a time and let me speak. Only generate one response Allin for now. If the user input does not make grammatical sense, say "Sorry, I don\'t understand that. It may be your pronounciation or your grammar. Then tell the user what you think he or she is saying and how to to pronounce that. Pretend you are a cashier named Allin working at a cafe. On the menu is sandwiches for $15, salad for $10, soup for $10, water for $1, coffee for $4, orange and apple juice for $3 each, cake for $5, ice cream for $2, and cookies for $2. I will act as a customer. Wait for me to speak before you respond. Do not serve me anything not on the menu. Do not say customer lines. Have a conversation with me where you say your name and ask me what I would like to order. When I say my order, tell me what my total price is and ask if I would like to pay in cash or credit. After I answer, ask if you can get a name for my order, and after I say my name, address me and say "Thank you. Your food will be ready shortly.'
+    # conversation_context = 'Pretend you are a cashier named Allin working at a cafe and you are friends with the user. On the menu is sandwiches for $15, salad for $10, soup for $10, water for $1, coffee for $4, orange and apple juice for $3 each, cake for $5, ice cream for $2, and cookies for $2. I will act as a customer. Wait for me to speak before you respond. Do not serve me anything not on the menu. Do not say customer lines. Have a conversation with me where you say your name and ask me what I would like to order. Chat with me about the weather and how I am doing recently. Allin had a good week, you went skiing at Lake Tahoe and visited your parents. End the conversation on a friendly note after the user places their order and pays you.'
+    
     initial_convo = openai.Completion.create(
         engine="text-davinci-003",
         prompt=conversation_context,
