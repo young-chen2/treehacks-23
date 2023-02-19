@@ -1,4 +1,5 @@
 # KittyChat
+An interactive website to make English conversation practice more accessible with a ChatGPT-powered talking cat barista. We have dynamic dialogue, scenarios to practice everyday vocab, and cute cats!
 ![](kittychat.gif)
 
 Read the devpost here: https://devpost.com/software/kittychat-catgpt-for-language-learning?ref_content=user-portfolio&ref_feature=in_progress
