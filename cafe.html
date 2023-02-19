@@ -13,6 +13,12 @@
     <link rel="stylesheet" type="text/css" href="css/globals.css" />
   </head>
   <body style="margin: 0">
+  <script>
+      function play() {
+        var audio = document.getElementById("audio");
+        audio.play();
+      }
+    </script>
     <input type="hidden" id="anPageName" name="page" value="cafe" />
     <div class="container-center-horizontal">
       <div class="cafe screen">
@@ -43,16 +49,16 @@
             <img class="image-3 image" src="img/image-3@2x.png" alt="image 3" />
             <div class="rectangle-4"></div>
             <div class="rectangle-5"></div>
+              <div class="repeat"><input type="button" value="Repeat" onclick="play()">
+              <audio id="audio" src="response.mp3"></audio></div>
             <h1 class="title">Speak</h1>
-            <div class="repeat">Repeat</div>
             <img
               class="icon-message-question"
               src="img/---icon--message-question-@2x.png"
               alt="icon &#34;message question&#34;"
             />
             <img class="image-1 image" src="img/cash-register.png" alt="image 1" />
-            <img class="icon-redo" src="img/---icon--redo-@2x.png" alt="icon &#34;redo&#34;" />
-          </div>
+            <button onClick="window.location.reload();"><img class="icon-redo" src="img/redo.png" alt="icon &#34;redo&#34;" /></button>
           <div class="ellipse-container">
             <div class="ellipse-8"></div>
             <img class="ellipse-10" src="img/ellipse-10.svg" alt="Ellipse 10" />
@@ -60,6 +66,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </body>
 </html>
