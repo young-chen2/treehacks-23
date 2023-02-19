@@ -4,7 +4,9 @@
 @import url("https://px.animaapp.com/63f14111832e57a228e0203b.63f14112f230318c7c4e4289.v0Ee2gC.hcp.png");
 
 
-
+html {
+  scroll-behavior: smooth;
+}
 .screen a {
   display: contents;
   text-decoration: none;

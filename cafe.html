@@ -14,6 +14,57 @@
   </head>
   <body style="margin: 0">
   <script>
+  var recordButton = document.getElementById("recordButton");
+var audioContext = new AudioContext();
+var audioChunks = [];
+
+recordButton.addEventListener("click", function() {
+  if (audioContext.state === 'suspended') {
+    audioContext.resume();
+  }
+
+  if (recordButton.textContent === "Record") {
+    navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(function(stream) {
+      var mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder.start();
+
+      mediaRecorder.addEventListener("dataavailable", function(event) {
+        audioChunks.push(event.data);
+      });
+
+      mediaRecorder.addEventListener("stop", function() {
+        var audioBlob = new Blob(audioChunks);
+        audioChunks = [];
+        var formData = new FormData();
+        formData.append("file", audioBlob, "recording.wav");
+
+        $.ajax({
+          url: "https://api.whisper.ai/upload",
+          method: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function(response) {
+            console.log(response);
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        });
+      });
+
+      recordButton.textContent = "Stop";
+    });
+  } else {
+    mediaRecorder.stop();
+    recordButton.textContent = "Record";
+  }
+});
+  error: function(error) {
+    console.log(error);
+  }
+});
       function play() {
         var audio = document.getElementById("audio");
         audio.play();
@@ -49,11 +100,11 @@
             <img class="image-3 image" src="img/image-3@2x.png" alt="image 3" />
             <div class="rectangle-4"></div>
             <div class="rectangle-5"></div>
-            <a href="{{ url_for('play-audio')}}" ><h1 class="repeat">Repeat</h1></a>
-<!--              <div class="repeat"><input type="button" value="Repeat" onclick="play()">-->
+            <a href="#" onclick="return false;"><h1 class="repeat">Repeat</h1></a>
+            <a href="https://github.com/young-chen2/treehacks-23"><h1 class="title">Speak</h1></a>
 <!--              <audio id="audio" src="response.mp3"></audio></div>-->
 <!--            <div class="repeat"><input type="button" value="Repeat" onclick="play()">-->
-            <a href="#" onclick="window.open({{ url_for('record-audio')}}); window.open({{ url_for('upload-audio')}});"><h1 class="title">Speak</h1></a>
+<!--            <h1 class="title"><button id="recordButton">Speak</button></h1></a>-->
             <img
               class="icon-message-question"
               src="img/---icon--message-question-@2x.png"
